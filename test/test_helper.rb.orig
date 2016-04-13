@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require 'test/unit'
 require 'open-uri'
 require 'pathname'
 require 'fake_web'
@@ -8,7 +8,7 @@ require 'mocha'
 
 
 # Give all tests a common setup and teardown that prevents shared state
-class Minitest::Test
+class Test::Unit::TestCase
   alias setup_without_fakeweb setup
   def setup
     FakeWeb.clean_registry
@@ -94,4 +94,4 @@ module FakeWebTestHelper
 
 end
 
-Minitest::Test.send(:include, FakeWebTestHelper)
+Test::Unit::TestCase.send(:include, FakeWebTestHelper)

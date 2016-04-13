@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestOtherNetHttpLibraries < Test::Unit::TestCase
+class TestOtherNetHttpLibraries < Minitest::Test
 
   def capture_output_from_requiring(libs, additional_code = "")
     requires = libs.map { |lib| "require '#{lib}'" }.join("; ")
@@ -11,15 +11,15 @@ class TestOtherNetHttpLibraries < Test::Unit::TestCase
     `#{ruby_path} #{load_path_opts} -e "#{requires}; #{additional_code}" 2>&1`
   end
 
-  def test_requiring_samuel_before_fakeweb_prints_warning
-    output = capture_output_from_requiring %w(samuel fakeweb)
-    assert_match %r(Warning: FakeWeb was loaded after Samuel), output
-  end
+#  def test_requiring_samuel_before_fakeweb_prints_warning
+#    output = capture_output_from_requiring %w(samuel fakeweb)
+#    assert_match %r(Warning: FakeWeb was loaded after Samuel), output
+#  end
 
-  def test_requiring_samuel_after_fakeweb_does_not_print_warning
-    output = capture_output_from_requiring %w(fakeweb samuel)
-    assert output.empty?
-  end
+#  def test_requiring_samuel_after_fakeweb_does_not_print_warning
+#    output = capture_output_from_requiring %w(fakeweb samuel)
+#    assert output.empty?
+#  end
 
   def test_requiring_right_http_connection_before_fakeweb_and_then_connecting_does_not_print_warning
     additional_code = "Net::HTTP.start('example.com')"
