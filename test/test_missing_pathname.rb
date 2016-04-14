@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestMissingPathname < Test::Unit::TestCase
+class TestMissingPathname < Minitest::Test
 
   def setup
     super
@@ -29,7 +29,7 @@ class TestMissingPathname < Test::Unit::TestCase
 
   def test_register_using_unsupported_response_without_pathname
     FakeWeb.register_uri(:get, "http://example.com/", :response => 1)
-    assert_raise StandardError do
+    assert_raises StandardError do
       Net::HTTP.start("example.com") { |http| http.get("/") }
     end
   end

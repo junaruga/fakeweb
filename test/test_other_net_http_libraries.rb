@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestOtherNetHttpLibraries < Test::Unit::TestCase
+class TestOtherNetHttpLibraries < Minitest::Test
 
   def capture_output_from_requiring(libs, additional_code = "")
     requires = libs.map { |lib| "require '#{lib}'" }.join("; ")
